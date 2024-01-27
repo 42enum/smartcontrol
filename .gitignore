@@ -1,0 +1,28 @@
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# Ignore virtual environment
+venv/
+.venv/
+
+# Ignore database files
+*.db
+
+# Ignore Flask migration files
+/migrations/
+
+# Ignore environment variables file
+.env
+
+# Node.js dependencies
+node_modules/
+
+# Compiled CSS files
+static/output.css
+
+# Dependency directories
+/jinja2_node_modules/
+
+# VS Code specific files
+.vscode/
