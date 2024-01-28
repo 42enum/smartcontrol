@@ -16,8 +16,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 import os
 import uuid
+from flask_bcrypt import Bcrypt
 from sqlalchemy import cast, String
-
 
 # Config
 load_dotenv()
@@ -28,11 +28,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+bcrypt = Bcrypt()
+
 with app.app_context():
-    db = SQLAlchemy(app)
-    migrate = Migrate(app, db)
-    login_manager = LoginManager(app)
-    login_manager.login_view = "login"
     db.create_all()
 
 
@@ -45,14 +47,14 @@ class User(db.Model, UserMixin):
 
 
 class IRCommand(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     model = db.Column(db.String(50), unique=True, nullable=False)
     raw_on = db.Column(db.String(2000), nullable=False)
     raw_off = db.Column(db.String(2000), nullable=False)
 
 
 class Equipment(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     model = db.Column(db.String(50), nullable=False)
     brand = db.Column(db.String(50), nullable=False)
     active = db.Column(db.Boolean, default=True)
@@ -94,33 +96,207 @@ def load_user(user_id):
 # Routes
 @app.route("/")
 def home():
-    return render_template("home.html", current_user=current_user)
+    return redirect(url_for("dashboard"))
 
 
-@app.route("/make_post_request", methods=["POST"])
-def make_post_request():
-    # Get data from the POST request
-    data = request.json
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
 
-    # Perform any processing needed before making the external API request
+    return render_template("dashboard.html", buildings=distinct_buildings)
 
-    # Make the external API request (replace with your actual API endpoint)
-    # For example, using the 'requests' library
-    # import requests
-    # response = requests.post('https://api.example.com/endpoint', json=data)
 
-    # For demonstration purposes, return a JSON response
-    return jsonify(
-        {"status": "success", "message": "POST request sent to external API"}
+@app.route("/building/<building>")
+@login_required
+def building_detail(building):
+    equipment_in_building = Equipment.query.filter_by(building=building).all()
+
+    # For the side bar list
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return render_template(
+        "building_detail.html",
+        building=building,
+        equipment_list=equipment_in_building,
+        building_list=distinct_buildings,
     )
 
 
-@app.route("/admin_page")
+@app.route("/admin")
 @login_required
 def admin_page():
     if not is_admin():
         return f"You do not have permission to access this page. Your current role is {current_user.role}"
-    return render_template("admin_page.html", user=current_user)
+
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    equipment_list = Equipment.query.all()
+    ir_commands = IRCommand.query.all()
+
+    return render_template(
+        "admin.html",
+        user=current_user,
+        buildings=distinct_buildings,
+        equipment_list=equipment_list,
+        ir_commands=ir_commands,
+    )
+
+
+@app.route("/admin/add_ir_command", methods=["GET", "POST"])
+@login_required
+def add_ir_command():
+    if not is_admin():
+        return f"You do not have permission to access this page. Your current role is {current_user.role}"
+
+    if request.method == "POST":
+        model = request.form.get("model")
+        raw_on = request.form.get("raw_on").replace(" ", "")
+        raw_off = request.form.get("raw_off").replace(" ", "")
+
+        # Check if the command for the model already exists
+        existing_item = IRCommand.query.filter_by(model=model).first()
+
+        if existing_item:
+            flash(
+                "Command with the same model already exists. Choose a different name.",
+                "danger",
+            )
+            return redirect(url_for("add_ir_command"))
+
+        new_ir_command = IRCommand(model=model, raw_on=raw_on, raw_off=raw_off)
+        db.session.add(new_ir_command)
+        db.session.commit()
+
+        return redirect(url_for("admin_page"))
+
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return render_template("add_ir_command.html", buildings=distinct_buildings)
+
+
+@app.route("/admin/add_equipment", methods=["GET", "POST"])
+@login_required
+def add_equipment():
+    if not is_admin():
+        return f"You do not have permission to access this page. Your current role is {current_user.role}"
+
+    if request.method == "POST":
+        brand = request.form.get("brand")
+        model = request.form.get("model")
+        building = request.form.get("building")
+        room = request.form.get("room")
+        esp_address = request.form.get("esp_address")
+
+        new_equipment = Equipment(
+            model=model,
+            brand=brand,
+            building=building,
+            room=room,
+            esp_address=esp_address,
+        )
+        db.session.add(new_equipment)
+        db.session.commit()
+
+        return redirect(url_for("admin_page"))
+
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return render_template("add_equipment.html", buildings=distinct_buildings)
+
+
+@app.route("/admin/edit_ir_command/<ir_command_id>", methods=["GET", "POST"])
+@login_required
+def edit_ir_command(ir_command_id):
+    if not is_admin():
+        return f"You do not have permission to access this page. Your current role is {current_user.role}"
+
+    ir_command = IRCommand.query.get_or_404(ir_command_id)
+
+    if request.method == "POST":
+        ir_command.model = request.form.get("model")
+        ir_command.raw_on = request.form.get("raw_on").replace(" ", "")
+        ir_command.raw_off = request.form.get("raw_off").replace(" ", "")
+
+        db.session.commit()
+
+        return redirect(url_for("admin_page"))
+
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return render_template(
+        "edit_ir_command.html", buildings=distinct_buildings, ir_command=ir_command
+    )
+
+@app.route("/admin/edit_equipment/<equipment_id>", methods=["GET", "POST"])
+@login_required
+def edit_equipment(equipment_id):
+    if not is_admin():
+        return f"You do not have permission to access this page. Your current role is {current_user.role}"
+
+    equipment = Equipment.query.get_or_404(equipment_id)
+
+    if request.method == "POST":
+        equipment.brand = request.form.get("brand")
+        equipment.model = request.form.get("model")
+        equipment.building = request.form.get("building")
+        equipment.room = request.form.get("room")
+        equipment.esp_address = request.form.get("esp_address")
+
+        db.session.commit()
+
+        return redirect(url_for("admin_page"))
+
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return render_template(
+        "edit_equipment.html", buildings=distinct_buildings, equipment=equipment
+    )
+
+
+@app.route("/request_to_esp", methods=["POST"])
+def request_to_esp():
+    # Get data from the POST request
+    data = request.json
+    equipment = Equipment.query.get(id=data['id'])
+    ir_command = IRCommand.query.get(model=equipment.model)
+
+    
+    # import requests
+    # response = requests.post('equipment.esp_address', json=ir_command.raw_on)
+
+    # For demonstration purposes, return a JSON response    
+    return jsonify(
+        {"status": "success", "message": "POST request sent to ESP"}
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])

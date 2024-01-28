@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="../static/output.css" />
+  </head>
+  <body>
+    <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
+      <div class="hidden border-r bg-gray-100 lg:block">
+        <div class="flex h-full max-h-screen flex-col gap-2">
+          <div class="flex h-[60px] items-center border-b px-6">
+            <a class="flex items-center gap-2 font-semibold" href="#"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-6 w-6"
+              >
+                <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                <path d="M9 22v-4h6v4"></path>
+                <path d="M8 6h.01"></path>
+                <path d="M16 6h.01"></path>
+                <path d="M12 6h.01"></path>
+                <path d="M12 10h.01"></path>
+                <path d="M12 14h.01"></path>
+                <path d="M16 10h.01"></path>
+                <path d="M16 14h.01"></path>
+                <path d="M8 10h.01"></path>
+                <path d="M8 14h.01"></path>
+              </svg>
+              <span class="">UFCA - Smart Control</span></a
+            ><a
+              class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground ml-auto inline-flex h-8 w-8 items-center justify-center whitespace-nowrap rounded-md border bg-red-100 text-sm font-medium text-red-700 transition-colors hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              href="{{ url_for('logout') }}"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" x2="9" y1="12" y2="12"></line>
+              </svg>
+              <span class="sr-only">Logout</span>
+            </a>
+          </div>
+          <div class="flex-1 overflow-auto py-2">
+            <nav class="grid items-start px-4 text-sm font-medium">
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="#"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                </svg>
+                Dashboard
+              </a>
+
+              {% for building in buildings %}
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="{{ url_for('building_detail', building=building) }}"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                  <path d="M9 22v-4h6v4"></path>
+                  <path d="M8 6h.01"></path>
+                  <path d="M16 6h.01"></path>
+                  <path d="M12 6h.01"></path>
+                  <path d="M12 10h.01"></path>
+                  <path d="M12 14h.01"></path>
+                  <path d="M16 10h.01"></path>
+                  <path d="M16 14h.01"></path>
+                  <path d="M8 10h.01"></path>
+                  <path d="M8 14h.01"></path>
+                </svg>
+                Bloco {{ building }}
+              </a>
+              {% endfor %} {% if is_admin() %}
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="{{ url_for('admin_page') }}"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <path
+                    d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Admin
+              </a>
+              {% endif %}
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <header
+          class="flex h-14 items-center gap-4 border-b bg-gray-100 px-6 lg:h-[60px]"
+        >
+          <a class="lg:hidden" href="#"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6"
+            >
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+              <path d="M9 22v-4h6v4"></path>
+              <path d="M8 6h.01"></path>
+              <path d="M16 6h.01"></path>
+              <path d="M12 6h.01"></path>
+              <path d="M12 10h.01"></path>
+              <path d="M12 14h.01"></path>
+              <path d="M16 10h.01"></path>
+              <path d="M16 14h.01"></path>
+              <path d="M8 10h.01"></path>
+              <path d="M8 14h.01"></path>
+            </svg>
+            <span class="sr-only">Home</span></a
+          >
+          <div class="w-full flex-1">
+            <h1 class="text-lg font-semibold md:text-2xl">Admin</h1>
+          </div>
+        </header>
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+          <div class="flex items-center">
+            <h2 class="text-lg font-semibold md:text-2xl">Aparelhos</h2>
+            <a
+              class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              href="{{ url_for('add_equipment') }}"
+            >
+              Adicionar Aparelho
+            </a>
+          </div>
+          <div class="rounded-lg border shadow-sm">
+            <div class="relative w-full overflow-auto">
+              <table class="w-full caption-bottom text-sm">
+                <thead class="[&amp;_tr]:border-b">
+                  <tr
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                  >
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
+                    >
+                      ID
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 max-w-[150px] px-4 text-left align-middle font-medium"
+                    >
+                      Bloco
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                    >
+                      Sala
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                    >
+                      Modelo
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 px-4 text-right align-middle font-medium"
+                    >
+                      Editar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="[&amp;_tr:last-child]:border-0">
+                  {% for equipment in equipment_list %}
+                  <tr
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                  >
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
+                    >
+                      {{ equipment.id }}
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle font-medium"
+                    >
+                      {{ equipment.building }}
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 hidden p-4 align-middle md:table-cell"
+                    >
+                      {{ equipment.room }}
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 hidden p-4 align-middle md:table-cell"
+                    >
+                      {{ equipment.model }}
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 text-right align-middle"
+                    >
+                      <a
+                        class="ring-offset-background focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                        href="{{ url_for('edit_equipment', equipment_id=equipment.id) }}"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="h-4 w-4"
+                        >
+                          <path
+                            d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"
+                          ></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <path
+                            d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"
+                          ></path>
+                        </svg>
+                        <span class="sr-only">Edit</span>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <h2 class="text-lg font-semibold md:text-2xl">
+              Comandos Infravermelho
+            </h2>
+            <a
+              class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              href="{{ url_for('add_ir_command') }}"
+            >
+              Adicionar Comando IR
+            </a>
+          </div>
+          <div class="rounded-lg border shadow-sm">
+            <div class="relative w-full overflow-auto">
+              <table class="w-full caption-bottom text-sm">
+                <thead class="[&amp;_tr]:border-b">
+                  <tr
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                  >
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
+                    >
+                      ID
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 max-w-[150px] px-4 text-left align-middle font-medium"
+                    >
+                      Model
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                    >
+                      Comando RAW - Ligar
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                    >
+                      Comando RAW - Desligar
+                    </th>
+                    <th
+                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 px-4 text-right align-middle font-medium"
+                    >
+                      Editar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="[&amp;_tr:last-child]:border-0">
+                  {% for ir_command in ir_commands %}
+                  <tr
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                  >
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
+                    >
+                      {{ ir_command.id }}
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle font-medium"
+                    >
+                      {{ ir_command.model }}
+                    </td>
+                    <td
+                      class="raw [&amp;:has([role=checkbox])]:pr-0 line-clamp-1 hidden p-4 align-middle md:table-cell"
+                    >
+                      {{ ir_command.raw_on.replace(',', ', ')[:30] + '...' }}
+                      <!--Line clamp didn't work-->
+                    </td>
+
+                    <td
+                      class="raw [&amp;:has([role=checkbox])]:pr-0 line-clamp-1 hidden p-4 align-middle md:table-cell"
+                    >
+                      {{ ir_command.raw_off.replace(',', ', ')[:30] + '...' }}
+                      <!--Line clamp didn't work-->
+                    </td>
+                    <td
+                      class="[&amp;:has([role=checkbox])]:pr-0 p-4 text-right align-middle"
+                    >
+                      <a
+                        class="ring-offset-background focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                        href="{{ url_for('edit_ir_command', ir_command_id=ir_command.id) }}"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="h-4 w-4"
+                        >
+                          <path
+                            d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5"
+                          ></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <path
+                            d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z"
+                          ></path>
+                        </svg>
+                        <span class="sr-only">Editar</span>
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -7,3 +7,4 @@ requests
 Flask-Migrate
 Flask-WTF 
 bcrypt
+Flask-Bcrypt

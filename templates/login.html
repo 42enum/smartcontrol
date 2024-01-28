@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Smart Control</title>
+    <link rel="stylesheet" href="../static/output.css" />
+  </head>
+  <body>
+    <div
+      class="flex min-h-screen flex-col items-center justify-center bg-gray-100"
+    >
+      <form
+        class="bg-card text-card-foreground w-full max-w-md rounded-lg border bg-white shadow-sm"
+        data-v0-t="card"
+        method="post"
+        action="{{ url_for('login') }}"
+      >
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="whitespace-nowrap text-2xl font-semibold tracking-tight">
+            Login
+          </h3>
+          <p class="text-muted-foreground text-sm">
+            Informe suas credenciais para entrar na plataforma
+          </p>
+          {{ form.hidden_tag() }}
+        </div>
+        <div class="space-y-4 p-6">
+          <div class="space-y-2">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for="username"
+            >
+              Username
+            </label>
+
+            {{ form.username( class="border-input bg-background
+            ring-offset-background placeholder:text-muted-foreground
+            focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2
+            text-sm file:border-0 file:bg-transparent file:text-sm
+            file:font-medium focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-offset-2 disabled:cursor-not-allowed
+            disabled:opacity-50", placeholder="Insira seu username") }}
+          </div>
+
+          <div class="space-y-2">
+            <label
+              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              for="password"
+            >
+              Senha
+            </label>
+
+            {{ form.password(class="border-input bg-background
+            ring-offset-background placeholder:text-muted-foreground
+            focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2
+            text-sm file:border-0 file:bg-transparent file:text-sm
+            file:font-medium focus-visible:outline-none focus-visible:ring-2
+            focus-visible:ring-offset-2 disabled:cursor-not-allowed
+            disabled:opacity-50", placeholder="Informe sua senha",
+            autocomplete="current-password") }}
+          </div>
+        </div>
+        <div class="flex items-center p-6">
+          {{ form.submit(class="ring-offset-background focus-visible:ring-ring
+          bg-primary text-primary-foreground hover:bg-primary/90 inline-flex
+          h-10 w-full items-center justify-center whitespace-nowrap rounded-md
+          bg-black px-4 py-2 text-sm font-medium text-white transition-colors
+          focus-visible:outline-none focus-visible:ring-2
+          focus-visible:ring-offset-2 disabled:pointer-events-none
+          disabled:opacity-50") }}
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

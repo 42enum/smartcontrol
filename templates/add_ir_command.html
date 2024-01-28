@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Novo Comando IR</title>
+    <link rel="stylesheet" href="../static/output.css" />
+  </head>
+  <body>
+    <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
+      <div class="hidden border-r bg-gray-100 lg:block">
+        <div class="flex h-full max-h-screen flex-col gap-2">
+          <div class="flex h-[60px] items-center border-b px-6">
+            <a class="flex items-center gap-2 font-semibold" href="#"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-6 w-6"
+              >
+                <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                <path d="M9 22v-4h6v4"></path>
+                <path d="M8 6h.01"></path>
+                <path d="M16 6h.01"></path>
+                <path d="M12 6h.01"></path>
+                <path d="M12 10h.01"></path>
+                <path d="M12 14h.01"></path>
+                <path d="M16 10h.01"></path>
+                <path d="M16 14h.01"></path>
+                <path d="M8 10h.01"></path>
+                <path d="M8 14h.01"></path>
+              </svg>
+              <span class="">UFCA - Smart Control</span></a
+            ><a
+              class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground ml-auto inline-flex h-8 w-8 items-center justify-center whitespace-nowrap rounded-md border bg-red-100 text-sm font-medium text-red-700 transition-colors hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              href="{{ url_for('logout') }}"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" x2="9" y1="12" y2="12"></line>
+              </svg>
+              <span class="sr-only">Logout</span>
+            </a>
+          </div>
+          <div class="flex-1 overflow-auto py-2">
+            <nav class="grid items-start px-4 text-sm font-medium">
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="#"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                </svg>
+                Dashboard
+              </a>
+
+              {% for building in buildings %}
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="{{ url_for('building_detail', building=building) }}"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+                  <path d="M9 22v-4h6v4"></path>
+                  <path d="M8 6h.01"></path>
+                  <path d="M16 6h.01"></path>
+                  <path d="M12 6h.01"></path>
+                  <path d="M12 10h.01"></path>
+                  <path d="M12 14h.01"></path>
+                  <path d="M16 10h.01"></path>
+                  <path d="M16 14h.01"></path>
+                  <path d="M8 10h.01"></path>
+                  <path d="M8 14h.01"></path>
+                </svg>
+                Bloco {{ building }}
+              </a>
+              {% endfor %} {% if is_admin() %}
+              <a
+                class="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900"
+                href="{{ url_for('admin_page') }}"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="h-4 w-4"
+                >
+                  <path
+                    d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                  ></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Admin
+              </a>
+              {% endif %}
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <header
+          class="flex h-14 items-center gap-4 border-b bg-gray-100 px-6 lg:h-[60px]"
+        >
+          <a class="lg:hidden" href="#"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-6 w-6"
+            >
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
+              <path d="M9 22v-4h6v4"></path>
+              <path d="M8 6h.01"></path>
+              <path d="M16 6h.01"></path>
+              <path d="M12 6h.01"></path>
+              <path d="M12 10h.01"></path>
+              <path d="M12 14h.01"></path>
+              <path d="M16 10h.01"></path>
+              <path d="M16 14h.01"></path>
+              <path d="M8 10h.01"></path>
+              <path d="M8 14h.01"></path>
+            </svg>
+            <span class="sr-only">Home</span></a
+          >
+          <div class="w-full flex-1">
+            <h1 class="text-lg font-semibold md:text-2xl">
+              Adicionar Novo Comando IR
+            </h1>
+          </div>
+        </header>
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+          <div class="rounded-lg border shadow-sm">
+            {% with messages = get_flashed_messages() %} {% if messages %}
+              {% for message in messages %}
+              <div class="rounded-md bg-green-50 p-4">
+                <div class="flex">
+                  <div class="ml-3"><h3 class="text-sm font-medium leading-5 text-red-800">{{ message }}</h3></div>
+                </div>
+              </div>
+        
+              {% endfor %}
+            {% endif %} {% endwith %}
+
+            <form class="p-4" method="post">
+              <div class="grid gap-4">
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="model"
+                    >Modelo do aparelho</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="model"
+                    placeholder="Insira modelo"
+                    required
+                  />
+                </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="raw_on"
+                    >Comando RAW para ligar</label
+                  ><textarea
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="raw_on"
+                    placeholder="Comando para ligar"
+                    required
+                  ></textarea>
+                </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="raw_off"
+                    >Comando RAW para desligar</label
+                  ><textarea
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="raw_off"
+                    placeholder="Comando para desligar"
+                    required
+                  ></textarea>
+                </div>
+
+                <button
+                  class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-black px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  type="submit"
+                >
+                  Salvar novo comando
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
