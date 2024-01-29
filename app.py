@@ -18,6 +18,7 @@ import os
 import uuid
 from flask_bcrypt import Bcrypt
 from sqlalchemy import cast, String
+import requests
 
 # Config
 load_dotenv()
@@ -93,6 +94,24 @@ def load_user(user_id):
     return User.query.filter(cast(User.id, String) == str(user_uuid)).first()
 
 
+# Database
+def get_buildings():
+    distinct_buildings = (
+        Equipment.query.with_entities(Equipment.building).distinct().all()
+    )
+    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
+    distinct_buildings.sort()
+
+    return distinct_buildings
+
+
+@app.context_processor
+def inject_buildings():
+    # Make the buildings available to all templates
+    buildings = get_buildings()
+    return dict(buildings=buildings)
+
+
 # Routes
 @app.route("/")
 def home():
@@ -102,13 +121,7 @@ def home():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
-    return render_template("dashboard.html", buildings=distinct_buildings)
+    return render_template("dashboard.html")
 
 
 @app.route("/building/<building>")
@@ -116,18 +129,10 @@ def dashboard():
 def building_detail(building):
     equipment_in_building = Equipment.query.filter_by(building=building).all()
 
-    # For the side bar list
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
     return render_template(
         "building_detail.html",
         building=building,
         equipment_list=equipment_in_building,
-        building_list=distinct_buildings,
     )
 
 
@@ -137,19 +142,12 @@ def admin_page():
     if not is_admin():
         return f"You do not have permission to access this page. Your current role is {current_user.role}"
 
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
     equipment_list = Equipment.query.all()
     ir_commands = IRCommand.query.all()
 
     return render_template(
         "admin.html",
         user=current_user,
-        buildings=distinct_buildings,
         equipment_list=equipment_list,
         ir_commands=ir_commands,
     )
@@ -182,13 +180,7 @@ def add_ir_command():
 
         return redirect(url_for("admin_page"))
 
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
-    return render_template("add_ir_command.html", buildings=distinct_buildings)
+    return render_template("add_ir_command.html")
 
 
 @app.route("/admin/add_equipment", methods=["GET", "POST"])
@@ -216,13 +208,7 @@ def add_equipment():
 
         return redirect(url_for("admin_page"))
 
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
-    return render_template("add_equipment.html", buildings=distinct_buildings)
+    return render_template("add_equipment.html")
 
 
 @app.route("/admin/edit_ir_command/<ir_command_id>", methods=["GET", "POST"])
@@ -242,15 +228,10 @@ def edit_ir_command(ir_command_id):
 
         return redirect(url_for("admin_page"))
 
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
     return render_template(
-        "edit_ir_command.html", buildings=distinct_buildings, ir_command=ir_command
+        "edit_ir_command.html", ir_command=ir_command
     )
+
 
 @app.route("/admin/edit_equipment/<equipment_id>", methods=["GET", "POST"])
 @login_required
@@ -271,32 +252,34 @@ def edit_equipment(equipment_id):
 
         return redirect(url_for("admin_page"))
 
-    distinct_buildings = (
-        Equipment.query.with_entities(Equipment.building).distinct().all()
-    )
-    distinct_buildings = [buildings[0] for buildings in distinct_buildings]
-    distinct_buildings.sort()
-
     return render_template(
-        "edit_equipment.html", buildings=distinct_buildings, equipment=equipment
+        "edit_equipment.html", equipment=equipment
     )
 
 
 @app.route("/request_to_esp", methods=["POST"])
 def request_to_esp():
-    # Get data from the POST request
     data = request.json
-    equipment = Equipment.query.get(id=data['id'])
-    ir_command = IRCommand.query.get(model=equipment.model)
+    equipment_id = data['id']
 
+    equipment = Equipment.query.get(equipment_id)
+    url = equipment.esp_address
+
+    if not url:
+        return jsonify({"status": "failed", "message": "This equipment has no ESP address associated with it"})
     
-    # import requests
-    # response = requests.post('equipment.esp_address', json=ir_command.raw_on)
+    ir_command = IRCommand.query.filter_by(model=equipment.model).first()
+    raw_on = ir_command.raw_on.strip()
 
-    # For demonstration purposes, return a JSON response    
-    return jsonify(
-        {"status": "success", "message": "POST request sent to ESP"}
-    )
+    headers = {
+        "Content-Type": "text/plain",
+    }
+
+    response = requests.post(url, data=raw_on, headers=headers)
+    if response.status_code == 200:
+        return jsonify({"status": "success", "message": "POST request sent to ESP"})
+    else:
+        return jsonify({"status": "failed", "message": "POST request to ESP failed"})
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -315,6 +298,11 @@ def register():
         password_hash = generate_password_hash(password)
 
         new_user = User(username=username, password_hash=password_hash)
+
+        # The first user will be an admin
+        if User.query.count() == 0:
+            new_user.role = "admin"
+
         db.session.add(new_user)
         db.session.commit()
 
