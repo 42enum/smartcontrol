@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json",
         },
       };
-
+      
       fetch("/request_to_esp", data)
         .then((res) => res.json().then((json) => console.log(json)))
         .catch((error) => console.error("Error:", error));
