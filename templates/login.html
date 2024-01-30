@@ -8,10 +8,33 @@
   </head>
   <body>
     <div
-      class="flex min-h-screen flex-col items-center justify-center bg-gray-100"
+      class="relative flex min-h-screen flex-col items-center justify-end overflow-hidden bg-gray-100"
     >
+      <div class="flex h-full max-h-96 flex-row content-end">
+        <svg
+          class="h-full w-screen"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 640"
+        >
+          <path
+            fill="#51c6d8"
+            fill-opacity="1"
+            d="M0,512L48,480C96,448,192,384,288,362.6C384,342,480,362,576,384C672,406,768,426,864,405.4C960,384,1056,320,1152,288C1248,256,1344,256,1392,256L1440,256L1440,640L1392,640C1344,640,1248,640,1152,640C1056,640,960,640,864,640C768,640,672,640,576,640C480,640,384,640,288,640C192,640,96,640,48,640L0,640Z"
+          ></path>
+          <path
+            fill="#75b747"
+            fill-opacity="0.3"
+            d="M0,128L48,160C96,192,192,256,288,277.4C384,298,480,278,576,298.6C672,320,768,384,864,362.6C960,342,1056,234,1152,234.6C1248,235,1344,342,1392,394.6L1440,448L1440,640L1392,640C1344,640,1248,640,1152,640C1056,640,960,640,864,640C768,640,672,640,576,640C480,640,384,640,288,640C192,640,96,640,48,640L0,640Z"
+          ></path>
+          <path
+            fill="#f7a92a"
+            fill-opacity="0.6"
+            d="M0,64L48,74.6C96,85,192,106,288,149.4C384,192,480,256,576,277.4C672,298,768,278,864,298.6C960,320,1056,384,1152,373.4C1248,362,1344,278,1392,234.6L1440,192L1440,640L1392,640C1344,640,1248,640,1152,640C1056,640,960,640,864,640C768,640,672,640,576,640C480,640,384,640,288,640C192,640,96,640,48,640L0,640Z"
+          ></path>
+        </svg>
+      </div>
       <form
-        class="bg-card text-card-foreground w-full max-w-md rounded-lg border bg-white shadow-sm"
+        class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 shadow-lg"
         data-v0-t="card"
         method="post"
         action="{{ url_for('login') }}"
@@ -21,7 +44,7 @@
             Login
           </h3>
           <p class="text-muted-foreground text-sm">
-            Informe suas credenciais para entrar na plataforma
+            Insira as credenciais para entrar na sua conta
           </p>
           {{ form.hidden_tag() }}
         </div>
@@ -30,26 +53,22 @@
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               for="username"
+              >Username</label
             >
-              Username
-            </label>
-
             {{ form.username( class="border-input bg-background
             ring-offset-background placeholder:text-muted-foreground
             focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2
             text-sm file:border-0 file:bg-transparent file:text-sm
             file:font-medium focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-offset-2 disabled:cursor-not-allowed
-            disabled:opacity-50", placeholder="Insira seu username") }}
+            disabled:opacity-50", placeholder="Insira seu username", autocomplete="current-password") }}
           </div>
-
           <div class="space-y-2">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               for="password"
+              >Senha</label
             >
-              Senha
-            </label>
 
             {{ form.password(class="border-input bg-background
             ring-offset-background placeholder:text-muted-foreground
@@ -57,16 +76,18 @@
             text-sm file:border-0 file:bg-transparent file:text-sm
             file:font-medium focus-visible:outline-none focus-visible:ring-2
             focus-visible:ring-offset-2 disabled:cursor-not-allowed
-            disabled:opacity-50", placeholder="Informe sua senha",
+            disabled:opacity-50", placeholder="Senha",
             autocomplete="current-password") }}
           </div>
         </div>
         <div class="flex items-center p-6">
           {{ form.submit(class="ring-offset-background focus-visible:ring-ring
           bg-primary text-primary-foreground hover:bg-primary/90 inline-flex
-          h-10 w-full items-center justify-center whitespace-nowrap rounded-md
-          bg-black px-4 py-2 text-sm font-medium text-white transition-colors
-          focus-visible:outline-none focus-visible:ring-2
+          h-10 w-full transform items-center justify-center whitespace-nowrap
+          rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-2
+          text-sm font-medium text-white shadow-md transition duration-500
+          ease-in-out hover:-translate-y-0.5 hover:scale-105 hover:from-blue-700
+          hover:to-blue-900 focus-visible:outline-none focus-visible:ring-2
           focus-visible:ring-offset-2 disabled:pointer-events-none
           disabled:opacity-50") }}
         </div>

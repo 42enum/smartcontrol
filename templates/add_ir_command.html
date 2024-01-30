@@ -10,42 +10,7 @@
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
       <div class="flex flex-col">
-        <header
-          class="flex h-14 items-center gap-4 border-b bg-gray-100 px-6 lg:h-[60px]"
-        >
-          <a class="lg:hidden" href="#"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-6 w-6"
-            >
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-              <path d="M9 22v-4h6v4"></path>
-              <path d="M8 6h.01"></path>
-              <path d="M16 6h.01"></path>
-              <path d="M12 6h.01"></path>
-              <path d="M12 10h.01"></path>
-              <path d="M12 14h.01"></path>
-              <path d="M16 10h.01"></path>
-              <path d="M16 14h.01"></path>
-              <path d="M8 10h.01"></path>
-              <path d="M8 14h.01"></path>
-            </svg>
-            <span class="sr-only">Home</span></a
-          >
-          <div class="w-full flex-1">
-            <h1 class="text-lg font-semibold md:text-2xl">
-              Adicionar Novo Comando IR
-            </h1>
-          </div>
-        </header>
+        {% with title='Novo Comando IR' %} {% include 'header.html' %} {% endwith %}
         <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           <div class="rounded-lg border shadow-sm">
             {% with messages = get_flashed_messages() %} {% if messages %}

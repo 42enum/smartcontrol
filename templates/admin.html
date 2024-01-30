@@ -9,52 +9,27 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col">
-        <header
-          class="flex h-14 items-center gap-4 border-b bg-gray-100 px-6 lg:h-[60px]"
-        >
-          <a class="lg:hidden" href="#"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="h-6 w-6"
-            >
-              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-              <path d="M9 22v-4h6v4"></path>
-              <path d="M8 6h.01"></path>
-              <path d="M16 6h.01"></path>
-              <path d="M12 6h.01"></path>
-              <path d="M12 10h.01"></path>
-              <path d="M12 14h.01"></path>
-              <path d="M16 10h.01"></path>
-              <path d="M16 14h.01"></path>
-              <path d="M8 10h.01"></path>
-              <path d="M8 14h.01"></path>
-            </svg>
-            <span class="sr-only">Home</span></a
-          >
-          <div class="w-full flex-1">
-            <h1 class="text-lg font-semibold md:text-2xl">Admin</h1>
-          </div>
-        </header>
+      <div class="flex flex-col rounded-lg bg-gray-100 bg-opacity-40 backdrop-blur-lg backdrop-filter">
+        {% with title='Admin' %} {% include 'header.html' %} {% endwith %}
+
         <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+          <div class="mb-4 flex items-center">
+            <a class="text-blue-600 hover:underline" href="#" rel="ugc">Home</a
+            ><span class="mx-2">/</span
+            ><a class="text-blue-600 hover:underline" href="#" rel="ugc"
+              >Admin</a
+            >
+          </div>
           <div class="flex items-center">
-            <h2 class="text-lg font-semibold md:text-2xl">Aparelhos</h2>
+            <h2 class="text-lg font-semibold text-gray-900 md:text-2xl">Aparelhos</h2>
             <a
-              class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              class="ring-offset-background focus-visible:ring-ring hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
               href="{{ url_for('add_equipment') }}"
             >
               Adicionar Aparelho
             </a>
           </div>
-          <div class="rounded-lg border shadow-sm">
+          <div class="rounded-lg border bg-white shadow-lg">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
                 <thead class="[&amp;_tr]:border-b">
@@ -150,17 +125,17 @@
             </div>
           </div>
           <div class="flex items-center">
-            <h2 class="text-lg font-semibold md:text-2xl">
+            <h2 class="text-lg font-semibold text-gray-900 md:text-2xl">
               Comandos Infravermelho
             </h2>
             <a
-              class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              class="ring-offset-background focus-visible:ring-ring hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
               href="{{ url_for('add_ir_command') }}"
             >
               Adicionar Comando IR
             </a>
           </div>
-          <div class="rounded-lg border shadow-sm">
+          <div class="rounded-lg border bg-white shadow-lg">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
                 <thead class="[&amp;_tr]:border-b">

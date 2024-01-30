@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro - Smart Control</title>
+    <title>Página não encontrada</title>
     {% include 'styles.html' %}
   </head>
 
@@ -34,55 +34,27 @@
           ></path>
         </svg>
       </div>
-      <form
+      <div
         class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 shadow-lg"
         data-v0-t="card"
-        method="post"
       >
         <div class="flex flex-col space-y-1.5 p-6">
           <h3 class="whitespace-nowrap text-2xl font-semibold tracking-tight">
-            Cadastrar
+            404
           </h3>
           <p class="text-muted-foreground text-sm">
-            Escolha um nome de usuário e senha para sua nova conta
+            Página não encontrada
           </p>
         </div>
-        <div class="space-y-4 p-6">
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="username"
-              >Username</label
-            ><input
-              class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-lg border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              name="username"
-              placeholder="Username"
-              required=""
-            />
-          </div>
-          <div class="space-y-2">
-            <label
-              class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              for="password"
-              >Password</label
-            ><input
-              type="password"
-              class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-lg border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-              name="password"
-              required=""
-              placeholder="Senha"
-            />
-          </div>
-        </div>
         <div class="flex items-center p-6">
-          <button
+          <a
             class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-10 w-full transform items-center justify-center whitespace-nowrap rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-500 ease-in-out hover:-translate-y-0.5 hover:scale-105 hover:from-blue-700 hover:to-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            type="submit"
+            href="{{ url_for('home') }}"
           >
-            Cadastrar
-          </button>
+            Voltar
+          </a>
         </div>
-      </form>
+    </div>
     </div>
   </body>
 </html>

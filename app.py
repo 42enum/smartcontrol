@@ -28,6 +28,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config['ERROR_404_HELP'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -228,9 +229,7 @@ def edit_ir_command(ir_command_id):
 
         return redirect(url_for("admin_page"))
 
-    return render_template(
-        "edit_ir_command.html", ir_command=ir_command
-    )
+    return render_template("edit_ir_command.html", ir_command=ir_command)
 
 
 @app.route("/admin/edit_equipment/<equipment_id>", methods=["GET", "POST"])
@@ -252,30 +251,35 @@ def edit_equipment(equipment_id):
 
         return redirect(url_for("admin_page"))
 
-    return render_template(
-        "edit_equipment.html", equipment=equipment
-    )
+    return render_template("edit_equipment.html", equipment=equipment)
 
 
 @app.route("/request_to_esp", methods=["POST"])
 def request_to_esp():
     data = request.json
-    equipment_id = data['id']
+    equipment_id = data["id"]
 
     equipment = Equipment.query.get(equipment_id)
     url = equipment.esp_address
 
     if not url:
-        return jsonify({"status": "failed", "message": "This equipment has no ESP address associated with it"})
-    
+        return jsonify(
+            {
+                "status": "failed",
+                "message": "This equipment has no ESP address associated with it",
+            }
+        )
+
     ir_command = IRCommand.query.filter_by(model=equipment.model).first()
-    raw_on = ir_command.raw_on.strip()
+
+    data_to_send = ir_command.raw_off if equipment.active else ir_command.raw_on
+    data_to_send = data_to_send.strip()
 
     headers = {
         "Content-Type": "text/plain",
     }
 
-    response = requests.post(url, data=raw_on, headers=headers)
+    response = requests.post(url, data=data_to_send, headers=headers)
     if response.status_code == 200:
         return jsonify({"status": "success", "message": "POST request sent to ESP"})
     else:
@@ -337,6 +341,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("home"))
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("404.html"), 404
 
 
 if __name__ == "__main__":
