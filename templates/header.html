@@ -29,7 +29,7 @@
     <span class="sr-only">Home</span></a
   >
   <div class="w-full flex-1">
-    <h1 class="text-lg font-semibold text-gray-900 md:text-2xl">{{ title }}</h1>
+    <h1 class="text-lg text-gray-900 md:text-2xl">{{ title }}</h1>
   </div>
   <div class="flex items-center gap-4">
     <input
@@ -55,8 +55,8 @@
           d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
         ></path>
         <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-        <span class="sr-only">Configurações</span>
+      </svg>
+      <span class="sr-only">Configurações</span>
     </button>
     <div class="group relative">
       <button
@@ -87,31 +87,64 @@
       ></span>
 
       <div
-        class="absolute -bottom-8 left-[-2.5rem] flex h-8 w-fit px-2 items-center justify-center rounded-lg bg-gray-100 text-center text-gray-900 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+        class="absolute -bottom-8 left-[-2.5rem] flex h-8 w-fit items-center justify-center rounded-lg bg-white px-2 text-center text-gray-900 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
       >
         Notificações
       </div>
     </div>
 
-    <button
-      class="ring-offset-background focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="h-6 w-6"
+    <div class="group relative">
+      <button
+        class="ring-offset-background focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
       >
-        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-      <span class="sr-only">Profile</span>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-6 w-6"
+        >
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+        <span class="sr-only">Profile</span>
+      </button>
+
+      <div
+        class="absolute -bottom-28 left-[-6rem] flex w-fit items-center justify-center rounded-lg bg-white pt-1 pb-2 px-2 text-center opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+      >
+        <div class="flex flex-col items-center gap-2 justify-start">
+          <p class="">Logado como {{ current_user.username }}</p>
+          <a
+            class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 float-end inline-flex h-10 w-full transform items-center justify-center whitespace-nowrap rounded-lg bg-gradient-to-r from-red-200 to-red-200 px-4 text-sm font-medium text-red-700 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70"
+            href="{{ url_for('logout') }}"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-4 w-4"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" x2="9" y1="12" y2="12"></line>
+            </svg>
+            <span class="sr-only">Logout</span>
+            <span>&nbsp; Sair</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>

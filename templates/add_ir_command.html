@@ -9,21 +9,10 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col">
+      <div class="flex flex-col bg-gray-100">
         {% with title='Novo Comando IR' %} {% include 'header.html' %} {% endwith %}
-        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div class="rounded-lg border shadow-sm">
-            {% with messages = get_flashed_messages() %} {% if messages %}
-              {% for message in messages %}
-              <div class="rounded-md bg-green-50 p-4">
-                <div class="flex">
-                  <div class="ml-3"><h3 class="text-sm font-medium leading-5 text-red-800">{{ message }}</h3></div>
-                </div>
-              </div>
-        
-              {% endfor %}
-            {% endif %} {% endwith %}
-
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 items-center">
+          <div class="rounded-lg border shadow-lg bg-white w-10/12">
             <form class="p-4" method="post">
               <div class="grid gap-4">
                 <div class="grid gap-2">
@@ -64,7 +53,7 @@
                 </div>
 
                 <button
-                  class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-black px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  class="ring-offset-background focus-visible:ring-ring bg-blue-700 text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                   type="submit"
                 >
                   Salvar novo comando

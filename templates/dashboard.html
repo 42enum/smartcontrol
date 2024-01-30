@@ -11,45 +11,56 @@
       {% include 'sidebar.html' %}
       <div class="flex flex-col">
         {% with title='Dashboard' %} {% include 'header.html' %} {% endwith %}
-        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <div
-            class="bg-card text-card-foreground rounded-lg border shadow-sm"
-            data-v0-t="card"
-          >
-            <div class="flex flex-col space-y-1.5 p-6">
-              <h3
-                class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight"
-              >
-                Uso de ar-condicionado
-              </h3>
-              <p class="text-muted-foreground text-sm">
-                Resumo do uso dos aparelhos em todos os blocos
-              </p>
-            </div>
-            <div class="p-6">
-              <div class="aspect-[4/3] w-full">
-                <div style="width: 100%; height: 100%"></div>
+        <main
+          class="flex flex-1 flex-col gap-4 bg-gray-100 p-4 md:gap-8 md:p-6"
+        >
+          <div class="grid gap-4 md:grid-cols-2">
+            <div
+              class="bg-card text-card-foreground rounded-lg border bg-white shadow-lg"
+              data-v0-t="card"
+            >
+              <div class="flex flex-col space-y-1.5 p-6">
+                <h3
+                  class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight"
+                >
+                  Custo Total
+                </h3>
+                <p class="text-muted-foreground text-sm">
+                  Custo de eletricidade consumida
+                </p>
               </div>
+              <div class="p-6"><p class="text-3xl font-bold">R$ 12,345</p></div>
+            </div>
+            <div
+              class="bg-card text-card-foreground rounded-lg border bg-white shadow-lg"
+              data-v0-t="card"
+            >
+              <div class="flex flex-col space-y-1.5 p-6">
+                <h3
+                  class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight"
+                >
+                  Custo Médio
+                </h3>
+                <p class="text-muted-foreground text-sm">
+                  Custo médio por bloco
+                </p>
+              </div>
+              <div class="p-6"><p class="text-3xl font-bold">R$ 1,234</p></div>
             </div>
           </div>
           <div
-            class="bg-card text-card-foreground rounded-lg border shadow-sm"
+            class="bg-card text-card-foreground h-96 w-full rounded-lg border bg-white shadow-lg"
             data-v0-t="card"
           >
             <div class="flex flex-col space-y-1.5 p-6">
               <h3
                 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight"
               >
-                Custos mensais
+                Consumo de Eletricidade
               </h3>
               <p class="text-muted-foreground text-sm">
-                Resumo dos custos mensais entre todos os blocos
+                Consumo de eletricidade ao longo dos últimos meses
               </p>
-            </div>
-            <div class="p-6">
-              <div class="aspect-[4/3] w-full">
-                <div style="width: 100%; height: 100%"></div>
-              </div>
             </div>
           </div>
         </main>

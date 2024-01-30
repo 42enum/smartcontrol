@@ -2,65 +2,18 @@
   class="hidden rounded-lg border-r bg-white bg-opacity-40 shadow-lg backdrop-blur-lg backdrop-filter lg:block"
 >
   <div class="flex h-full max-h-screen flex-col gap-2">
-    <div class="flex h-[60px] items-center justify-center px-6">
-      <a class="flex items-center justify-center gap-2 font-semibold" href="#"
+    <div class="flex items-center justify-center h-2 py-10">
+      <a class="flex flex-col items-center justify-center font-semibold" href="#"
         >
 
-        <div class="w-36">
+        <div class="w-36 h-20">
 
           <img class="w-full" src="{{ url_for('static', filename='logo-ufca.svg') }}" alt="Logo da Universidade">
         </div>
-        <!-- <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-6 w-6"
-        >
-          <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-          <path d="M9 22v-4h6v4"></path>
-          <path d="M8 6h.01"></path>
-          <path d="M16 6h.01"></path>
-          <path d="M12 6h.01"></path>
-          <path d="M12 10h.01"></path>
-          <path d="M12 14h.01"></path>
-          <path d="M16 10h.01"></path>
-          <path d="M16 14h.01"></path>
-          <path d="M8 10h.01"></path>
-          <path d="M8 14h.01"></path>
-        </svg>
-        <span class="">UFCA - Smart Control</span> -->
-        
-        </a
+        <span class="text-gray-700 font-medium" >Gerenciamento Inteligente</span>
+          </a
       >
-      <a
-        class="ring-offset-background focus-visible:ring-ring border-input bg-background hover:bg-accent hover:text-accent-foreground ml-auto inline-flex h-8 w-16 items-center justify-center whitespace-nowrap rounded-md border bg-red-100 text-sm font-medium text-red-700 transition-colors hover:cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-        href="{{ url_for('logout') }}"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="h-4 w-4"
-        >
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-          <polyline points="16 17 21 12 16 7"></polyline>
-          <line x1="21" x2="9" y1="12" y2="12"></line>
-        </svg>
-        <span class="sr-only">Logout</span>
-        <span>Sair</span>
-      </a>
+      
     </div>
     <div class="flex-1 overflow-auto py-2">
       <nav class="grid items-start px-4 font-medium">

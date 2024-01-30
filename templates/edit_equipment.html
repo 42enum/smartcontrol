@@ -9,9 +9,11 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col">
+      <div class="flex flex-col bg-gray-100">
         {% with title='Editar Aparelho' %} {% include 'header.html' %} {% endwith %}
-        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 items-center">
+          <div class="w-10/12 rounded-lg border bg-white shadow-lg">
+
           <form class="p-4" method="post">
             <div class="grid gap-4">
               <div class="grid gap-2">
@@ -22,7 +24,7 @@
                 ><input
                   class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="brand"
-                  placeholder="Insira marca do aparelho"
+                  placeholder="Marca do aparelho"
                   value="{{ equipment.brand }}"
                   required
                 />
@@ -36,7 +38,7 @@
                 ><input
                   class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="model"
-                  placeholder="Insira modelo do aparelho"
+                  placeholder="Mdelo do aparelho"
                   value="{{ equipment.model }}"
                   required
                 />
@@ -50,7 +52,7 @@
                 ><input
                   class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="building"
-                  placeholder="Insira o bloco onde o aparelho pertence"
+                  placeholder="Bloco onde o aparelho está instalado"
                   value="{{ equipment.building }}"
                   required
                 />
@@ -64,7 +66,7 @@
                 ><input
                   class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="room"
-                  placeholder="Insira a sala onde o aparelho pertence"
+                  placeholder="Sala onde o aparelho está instalado"
                   value="{{ equipment.brand }}"
                   required
                 />
@@ -84,13 +86,14 @@
               </div>
 
               <button
-                class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-black px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-blue-700 px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                 type="submit"
               >
                 Salvar aparelho
               </button>
             </div>
           </form>
+          </div>
         </main>
       </div>
     </div>

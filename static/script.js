@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      const previousState = button.innerHTML;
+      button.innerHTML = `<div class="spinner"></div>`;
+      button.setAttribute("disabled", "true");
+
       const buttonId = button.dataset.id;
 
       const data = {
@@ -12,10 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
           "Content-Type": "application/json",
         },
       };
-      
+
       fetch("/request_to_esp", data)
         .then((res) => res.json().then((json) => console.log(json)))
-        .catch((error) => console.error("Error:", error));
+        .catch((error) => console.error("Error:", error))
+        .finally(() => {
+          button.removeAttribute("disabled");
+          button.innerHTML = previousState;
+        });
     });
   });
 });

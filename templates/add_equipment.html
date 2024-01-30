@@ -9,83 +9,86 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col">
-        {% with title='Novo Aparelho' %} {% include 'header.html' %} {% endwith %}
-        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
-          <form class="p-4" method="post">
-            <div class="grid gap-4">
-              <div class="grid gap-2">
-                <label
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="brand"
-                  >Marca</label
-                ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  name="brand"
-                  placeholder="Insira marca do aparelho"
-                  required
-                />
-              </div>
+      <div class="flex flex-col bg-gray-100">
+        {% with title='Novo Aparelho' %} {% include 'header.html' %} {% endwith
+        %}
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 items-center">
+          <div class="w-10/12 rounded-lg border bg-white shadow-lg">
+            <form class="p-4" method="post">
+              <div class="grid gap-4">
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="brand"
+                    >Marca</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="brand"
+                    placeholder="Marca do aparelho"
+                    required
+                  />
+                </div>
 
-              <div class="grid gap-2">
-                <label
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="model"
-                  >Modelo</label
-                ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  name="model"
-                  placeholder="Insira modelo do aparelho"
-                  required
-                />
-              </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="model"
+                    >Modelo</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="model"
+                    placeholder="Modelo do aparelho"
+                    required
+                  />
+                </div>
 
-              <div class="grid gap-2">
-                <label
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="building"
-                  >Bloco</label
-                ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  name="building"
-                  placeholder="Insira o bloco onde o aparelho pertence"
-                  required
-                />
-              </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="building"
+                    >Bloco</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="building"
+                    placeholder="Bloco onde o aparelho está instalado"
+                    required
+                  />
+                </div>
 
-              <div class="grid gap-2">
-                <label
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="room"
-                  >Sala</label
-                ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  name="room"
-                  placeholder="Insira a sala onde o aparelho pertence"
-                  required
-                />
-              </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="room"
+                    >Sala</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="room"
+                    placeholder="Sala onde o aparelho está instalado"
+                    required
+                  />
+                </div>
 
-              <div class="grid gap-2">
-                <label
-                  class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="itemName"
-                  >Endereço do ESP</label
-                ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  name="esp_address"
-                  placeholder="(Opcional) Insira o endereço IP ou URL do ESP"
-                />
-              </div>
+                <div class="grid gap-2">
+                  <label
+                    class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    for="itemName"
+                    >Endereço do ESP</label
+                  ><input
+                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    name="esp_address"
+                    placeholder="(Opcional) Insira o endereço IP ou URL do ESP"
+                  />
+                </div>
 
-              <button
-                class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-black px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-                type="submit"
-              >
-                Salvar novo aparelho
-              </button>
-            </div>
-          </form>
+                <button
+                  class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 mt-4 inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md bg-blue-700 px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                  type="submit"
+                >
+                  Salvar novo aparelho
+                </button>
+              </div>
+            </form>
+          </div>
         </main>
       </div>
     </div>

@@ -28,7 +28,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
-app.config['ERROR_404_HELP'] = False
+app.config["ERROR_404_HELP"] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -266,7 +266,8 @@ def request_to_esp():
         return jsonify(
             {
                 "status": "failed",
-                "message": "This equipment has no ESP address associated with it",
+                "message": "There's no ESP address associated with this equipment",
+                "mensagem": "O endereço do ESP deste aparelho não está cadastrado.",
             }
         )
 
@@ -279,8 +280,18 @@ def request_to_esp():
         "Content-Type": "text/plain",
     }
 
-    response = requests.post(url, data=data_to_send, headers=headers)
+    try:
+        response = requests.post(url, data=data_to_send, headers=headers)
+    except Exception as e:
+        return jsonify(
+            {
+                "status": "failed",
+                "message": f"POST request to ESP caused an exception: {e}",
+                "mensagem": "A requisição causou um erro no lado do servidor. Entre em contato com o suporte.",
+            }
+        )
     if response.status_code == 200:
+        equipment.active = not equipment.active
         return jsonify({"status": "success", "message": "POST request sent to ESP"})
     else:
         return jsonify({"status": "failed", "message": "POST request to ESP failed"})

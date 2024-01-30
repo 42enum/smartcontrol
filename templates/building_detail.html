@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bloco {{ building }}</title>
     {% include 'styles.html' %}
+    <link rel="stylesheet" href="../static/spin.css" />
   </head>
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col">
-        {% with title='Bloco ' + building %} {% include 'header.html' %} {% endwith %}
-        <main class="flex flex-1 flex-col gap-4 bg-white p-4 md:gap-8 md:p-6">
+      <div
+        class="flex flex-col rounded-lg bg-gray-100 bg-opacity-40 backdrop-blur-lg backdrop-filter"
+      >
+        {% with title='Bloco ' + building %} {% include 'header.html' %} {%
+        endwith %}
+        <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           <div class="flex items-center">
             <h1 class="text-lg font-semibold md:text-2xl">Aparelhos</h1>
           </div>
-          <div class="rounded-lg border shadow-sm">
+          <div class="rounded-lg border bg-white shadow-lg">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
                 <thead class="[&amp;_tr]:border-b">
@@ -23,29 +27,29 @@
                     class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
                   >
                     <th
-                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
+                      class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
                     >
                       Sala
                     </th>
                     <th
-                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 max-w-[150px] px-4 text-left align-middle font-medium"
+                      class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 max-w-[150px] px-4 text-left align-middle font-medium"
                     >
                       Status
                     </th>
                     <th
-                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                      class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
                     >
                       Modelo
                     </th>
                     <th
-                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
+                      class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 hidden h-12 px-4 text-left align-middle font-medium md:table-cell"
                     >
                       Marca
                     </th>
                     <th
-                      class="text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 px-4 text-left align-middle font-medium"
+                      class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 px-4 text-right align-middle font-medium"
                     >
-                      Toggle
+                      Enviar comando
                     </th>
                   </tr>
                 </thead>
@@ -87,24 +91,32 @@
                         </div>
 
                         {% elif equipment.active %}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="h-4 w-4 text-green-500"
+
+                        <div
+                          class="flex items-center gap-2 rounded-full bg-green-200 px-2 py-1 text-sm text-green-800"
                         >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                        <span class="text-sm text-gray-500"> Ligado </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="h-4 w-4 text-green-500"
+                          >
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                          </svg>
+                          <span>Ligado</span>
+                        </div>
                         {% else %}
-                        <div class="flex items-center gap-2">
+
+                        <div
+                          class="flex items-center gap-2 rounded-full bg-red-200 px-2 py-1 text-sm text-red-800"
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -121,7 +133,7 @@
                             <path d="m15 9-6 6"></path>
                             <path d="m9 9 6 6"></path>
                           </svg>
-                          <span class="text-sm text-gray-500"> Desligado </span>
+                          <span>Desligado</span>
                         </div>
                         {% endif %}
                       </div>
@@ -135,7 +147,7 @@
                     <td
                       class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
                     >
-                      <p class="text-sm text-gray-500">{{ equipment.brand }}</p>
+                      <p class="text-sm text-gray-700">{{ equipment.brand }}</p>
                     </td>
                     <td
                       class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
@@ -144,10 +156,11 @@
                         type="button"
                         aria-pressed="false"
                         data-state="off"
-                        class="toggle-button ring-offset-background hover:bg-muted hover:text-muted-foreground focus-visible:ring-ring data-[state=on]:bg-accent data-[state=on]:text-accent-foreground ml-auto inline-flex h-10 w-full items-center justify-center rounded-md bg-black px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                        class="toggle-button ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 float-end inline-flex h-10 w-28 transform items-center justify-center whitespace-nowrap rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2 text-sm font-medium text-white shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70"
                         data-id="{{ equipment.id }}"
                       >
-                        Toggle
+                        {% if equipment.active %} Desligar {% else %} Ligar {%
+                        endif %}
                       </button>
                     </td>
                   </tr>
