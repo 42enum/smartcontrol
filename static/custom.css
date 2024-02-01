@@ -16,3 +16,21 @@
         transform: rotate(360deg);
     }
 }
+
+#toast-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+#my-chart {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#my-chart .line {}
+
+#my-chart .legend {}

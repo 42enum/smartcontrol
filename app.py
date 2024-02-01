@@ -282,7 +282,16 @@ def request_to_esp():
 
     try:
         response = requests.post(url, data=data_to_send, headers=headers)
-    except Exception as e:
+        response.raise_for_status()
+    except requests.exceptions.Timeout as e:
+        return jsonify(
+            {
+                "status": "failed",
+                "message": f"Error: {e}",
+                "mensagem": "A requisição causou um erro de timeout. Isso provavelmente quer dizer que o endereço ESP cadastrado está incorreto.",
+            }
+        )
+    except requests.exceptions.RequestException as e:
         return jsonify(
             {
                 "status": "failed",
@@ -292,9 +301,9 @@ def request_to_esp():
         )
     if response.status_code == 200:
         equipment.active = not equipment.active
-        return jsonify({"status": "success", "message": "POST request sent to ESP"})
+        return jsonify({"status": "success", "message": "POST request sent to ESP", "mensagem": "Comando enviado com sucesso."})
     else:
-        return jsonify({"status": "failed", "message": "POST request to ESP failed"})
+        return jsonify({"status": "failed", "message": "POST request to ESP failed", "mensagem": "ESP retornou uma resposta inesperada."})
 
 
 @app.route("/register", methods=["GET", "POST"])

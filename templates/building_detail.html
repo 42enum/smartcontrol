@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bloco {{ building }}</title>
     {% include 'styles.html' %}
-    <link rel="stylesheet" href="../static/spin.css" />
+    <link rel="stylesheet" href="../static/custom.css" />
   </head>
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
@@ -66,7 +66,7 @@
                     <td
                       class="[&amp;:has([role=checkbox])]:pr-0 hidden p-4 align-middle md:table-cell"
                     >
-                      <div class="flex items-center gap-2">
+                      <div class="flex items-center gap-2" id="status-{{ equipment.id }}">
                         {% if equipment.condition == 'maintenance' %}
                         <div class="flex items-center gap-2">
                           <svg
@@ -169,6 +169,7 @@
               </table>
             </div>
           </div>
+          <div id="toast-container"></div>
         </main>
       </div>
     </div>
