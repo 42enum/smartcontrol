@@ -134,7 +134,7 @@ def building_detail(building):
         "building_detail.html",
         building=building,
         equipment_list=equipment_in_building,
-    )
+    )   
 
 
 @app.route("/admin")
@@ -256,8 +256,8 @@ def edit_equipment(equipment_id):
 
 @app.route("/request_to_esp", methods=["POST"])
 def request_to_esp():
-    data = request.json
-    equipment_id = data["id"]
+    json = request.json
+    equipment_id = json["id"]
 
     equipment = Equipment.query.get(equipment_id)
     url = equipment.esp_address
@@ -272,6 +272,15 @@ def request_to_esp():
         )
 
     ir_command = IRCommand.query.filter_by(model=equipment.model).first()
+
+    if not ir_command:
+        return jsonify(
+            {
+                "status": "success",
+                "message": f"No IR Command found for this equipment's model: {equipment.model}",
+                "mensagem": f"Comando IR do modelo {equipment.model} não foi encontrado"
+            }
+        )
 
     data_to_send = ir_command.raw_off if equipment.active else ir_command.raw_on
     data_to_send = data_to_send.strip()
@@ -301,9 +310,66 @@ def request_to_esp():
         )
     if response.status_code == 200:
         equipment.active = not equipment.active
+        db.session.commit()
+        
         return jsonify({"status": "success", "message": "POST request sent to ESP", "mensagem": "Comando enviado com sucesso."})
     else:
         return jsonify({"status": "failed", "message": "POST request to ESP failed", "mensagem": "ESP retornou uma resposta inesperada."})
+
+
+@app.route("/simplified_request_to_esp", methods=["POST"])
+def simplified_request_to_esp():
+    # This method doesn't send IR commands instead it will send a simple string for testing
+
+    json = request.json
+    equipment_id = json["id"]
+
+    equipment = Equipment.query.get(equipment_id)
+
+    url = equipment.esp_address
+
+    if not url:
+        return jsonify(
+            {
+                "status": "failed",
+                "message": "There's no ESP address associated with this equipment",
+                "mensagem": "O endereço do ESP deste aparelho não está cadastrado.",
+            }
+        )
+
+    data_to_send = "desligar" if equipment.active else "ligar"
+    
+    headers = {
+        "Content-Type": "text/plain",
+    }
+
+    try:
+        response = requests.post(url, data=data_to_send, headers=headers)
+        response.raise_for_status()
+    except requests.exceptions.Timeout as e:
+        return jsonify(
+            {
+                "status": "failed",
+                "message": f"Error: {e}",
+                "mensagem": "A requisição causou um erro de timeout. Isso provavelmente quer dizer que o endereço ESP cadastrado está incorreto.",
+            }
+        )
+    except requests.exceptions.RequestException as e:
+        return jsonify(
+            {
+                "status": "failed",
+                "message": f"POST request to ESP caused an exception: {e}",
+                "mensagem": "A requisição causou um erro no lado do servidor. Entre em contato com o suporte.",
+            }
+        )
+    if response.status_code == 200:
+        equipment.active = not equipment.active
+        db.session.commit()
+
+        return jsonify({"status": "success", "message": "POST request sent to ESP", "mensagem": "Comando enviado com sucesso."})
+    else:
+        return jsonify({"status": "failed", "message": "POST request to ESP failed", "mensagem": "ESP retornou uma resposta inesperada."})
+
 
 
 @app.route("/register", methods=["GET", "POST"])

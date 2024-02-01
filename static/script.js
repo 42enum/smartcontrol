@@ -1,3 +1,5 @@
+const route = "/simplified_request_to_esp"; // "/request_to_esp"
+
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".toggle-button");
   const toastContainer = document.getElementById("toast-container");
@@ -20,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let message;
 
-      fetch("/request_to_esp", data)
+      fetch(route, data)
         .then((res) =>
           res.json().then((json) => {
             console.log(json);
