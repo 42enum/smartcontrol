@@ -53,7 +53,7 @@
             class="bg-card text-card-foreground h-96 w-full rounded-lg border bg-white shadow-lg"
             data-v0-t="card"
           >
-            <div class="flex flex-col space-y-1.5 p-6">
+            <div class="flex flex-col space-y-1.5 p-6 max-h-96">
               <h3
                 class="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight"
               >
@@ -63,10 +63,22 @@
                 Consumo de eletricidade ao longo dos últimos meses
               </p>
 
-              <div id="my-chart">
+              <div id="my-chart" class="h-full">
                 <table class="charts-css line show-heading">
                   <tr>
-                    <td style="--start: 0.2; --end: 0.4;"> <span class="data"> $ 40K </span> </td>
+                    <td style="--start: 0.6; --end: 0.8;"> <span class="data"> $ 40K </span> </td>
+                  </tr>
+                  <tr>
+                    <td style="--start: 0.8; --end: 0.7;"> <span class="data"> $ 30K </span> </td>
+                  </tr>
+                  <tr>
+                    <td style="--start: 0.7; --end: 0.6;"> <span class="data"> $ 20K </span> </td>
+                  </tr>
+                  <tr>
+                    <td style="--start: 0.6; --end: 0.6;"> <span class="data"> $ 20K </span> </td>
+                  </tr>
+                  <tr>
+                    <td style="--start: 0.6; --end: 0.8;"> <span class="data"> $ 40K </span> </td>
                   </tr>
                 </table>
               </div>
