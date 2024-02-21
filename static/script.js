@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if (previousState.trim() === "Ligar") {
                 statusElem.innerHTML = `
                 <div
-                class="flex items-center gap-2 rounded-full bg-green-200 px-2 py-1 text-sm text-green-800"
+                class="flex items-center gap-2 rounded-full bg-green-200 dark:bg-green-800 px-2 py-1 text-sm dark:text-green-300 text-green-800"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="h-4 w-4 text-green-500"
+                  class="h-4 w-4 text-green-500 dark:text-green-300"
                 >
                   <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                   <polyline points="22 4 12 14.01 9 11.01"></polyline>
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
               } else {
                 statusElem.innerHTML = `
                 <div
-                          class="flex items-center gap-2 rounded-full bg-red-200 px-2 py-1 text-sm text-red-800"
+                          class="flex items-center gap-2 rounded-full bg-red-200 dark:bg-red-800 dark:text-red-200 px-2 py-1 text-sm text-red-800"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="h-4 w-4 text-red-500"
+                            class="h-4 w-4 text-red-500 dark:text-red-200"
                           >
                             <circle cx="12" cy="12" r="10"></circle>
                             <path d="m15 9-6 6"></path>
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       function createToast(message) {
         const toast = document.createElement("div");
-        toast.className = "bg-red-200 text-red-800 font-medium p-4 m-2 border rounded opacity-0 transition-opacity duration-300 ease-in-out";
+        toast.className = "bg-red-200 dark:bg-red-800 dark:text-red-200 dark:border-0 text-red-800 font-medium p-4 m-2 border rounded opacity-0 transition-opacity duration-300 ease-in-out";
         toast.innerText = message;
 
         toastContainer.appendChild(toast);

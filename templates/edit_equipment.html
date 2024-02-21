@@ -9,10 +9,10 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col bg-gray-100">
+      <div class="flex flex-col bg-gray-100 dark:bg-neutral-950">
         {% with title='Editar Aparelho' %} {% include 'header.html' %} {% endwith %}
         <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 items-center">
-          <div class="w-10/12 rounded-lg border bg-white shadow-lg">
+          <div class="w-10/12 rounded-lg border bg-white shadow-lg dark:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-300">
 
           <form class="p-4" method="post">
             <div class="grid gap-4">
@@ -22,7 +22,7 @@
                   for="brand"
                   >Marca</label
                 ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="brand"
                   placeholder="Marca do aparelho"
                   value="{{ equipment.brand }}"
@@ -36,7 +36,7 @@
                   for="model"
                   >Modelo</label
                 ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="model"
                   placeholder="Mdelo do aparelho"
                   value="{{ equipment.model }}"
@@ -50,7 +50,7 @@
                   for="building"
                   >Bloco</label
                 ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="building"
                   placeholder="Bloco onde o aparelho está instalado"
                   value="{{ equipment.building }}"
@@ -64,7 +64,7 @@
                   for="room"
                   >Sala</label
                 ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="room"
                   placeholder="Sala onde o aparelho está instalado"
                   value="{{ equipment.room }}"
@@ -78,7 +78,7 @@
                   for="itemName"
                   >Endereço do ESP</label
                 ><input
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   name="esp_address"
                   placeholder="(Opcional) Insira o endereço IP ou URL do ESP"
                   value="{{ equipment.esp_address }}"

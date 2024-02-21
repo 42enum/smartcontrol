@@ -5,10 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Smart Control</title>
     {% include 'styles.html' %}
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          const paths = Array.from(document.getElementsByTagName("path"));
+          paths.forEach((path) => {
+            path.setAttribute("fill", "#1e4fd9");
+          });
+        }
+      });
+    </script>
   </head>
   <body>
     <div
-      class="relative flex min-h-screen flex-col items-center justify-end overflow-hidden bg-gray-100"
+      class="relative flex min-h-screen flex-col items-center justify-end overflow-hidden bg-gray-100 dark:bg-neutral-950"
     >
       <div class="flex h-full max-h-96 flex-row content-end">
         <svg
@@ -34,7 +47,7 @@
         </svg>
       </div>
       <form
-        class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 shadow-lg"
+        class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-800 shadow-lg"
         data-v0-t="card"
         method="post"
         action="{{ url_for('login') }}"
@@ -55,7 +68,7 @@
               for="username"
               >Username</label
             >
-            {{ form.username( class="border-input bg-background
+            {{ form.username( class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background
             ring-offset-background placeholder:text-muted-foreground
             focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2
             text-sm file:border-0 file:bg-transparent file:text-sm
@@ -70,7 +83,7 @@
               >Senha</label
             >
 
-            {{ form.password(class="border-input bg-background
+            {{ form.password(class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background
             ring-offset-background placeholder:text-muted-foreground
             focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2
             text-sm file:border-0 file:bg-transparent file:text-sm

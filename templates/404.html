@@ -4,12 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Página não encontrada</title>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          const paths = Array.from(document.getElementsByTagName("path"));
+          paths.forEach((path) => {
+            path.setAttribute("fill", "#1e4fd9");
+          });
+        }
+      });
+    </script>
     {% include 'styles.html' %}
   </head>
 
   <body>
     <div
-      class="relative flex min-h-screen flex-col items-center justify-end overflow-hidden bg-gray-100"
+      class="relative flex min-h-screen flex-col items-center justify-end overflow-hidden bg-gray-100 dark:bg-neutral-950"
     >
       <div class="flex h-full max-h-96 flex-row content-end">
         <svg
@@ -35,16 +48,14 @@
         </svg>
       </div>
       <div
-        class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 shadow-lg"
+        class="bg-card text-card-foreground absolute top-28 z-10 w-full max-w-md rounded-xl border bg-white/90 shadow-lg dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-300"
         data-v0-t="card"
       >
         <div class="flex flex-col space-y-1.5 p-6">
           <h3 class="whitespace-nowrap text-2xl font-semibold tracking-tight">
             404
           </h3>
-          <p class="text-muted-foreground text-sm">
-            Página não encontrada
-          </p>
+          <p class="text-muted-foreground text-sm">Página não encontrada</p>
         </div>
         <div class="flex items-center p-6">
           <a
@@ -54,7 +65,7 @@
             Voltar
           </a>
         </div>
-    </div>
+      </div>
     </div>
   </body>
 </html>

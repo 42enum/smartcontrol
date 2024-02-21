@@ -9,10 +9,10 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col bg-gray-100">
+      <div class="flex flex-col bg-gray-100 dark:bg-neutral-950">
         {% with title='Novo Comando IR' %} {% include 'header.html' %} {% endwith %}
         <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6 items-center">
-          <div class="rounded-lg border shadow-lg bg-white w-10/12">
+          <div class="rounded-lg border shadow-lg bg-white w-10/12 dark:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-300">
             <form class="p-4" method="post">
               <div class="grid gap-4">
                 <div class="grid gap-2">
@@ -21,7 +21,7 @@
                     for="model"
                     >Modelo do aparelho</label
                   ><input
-                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     name="model"
                     placeholder="Insira modelo"
                     required
@@ -33,7 +33,7 @@
                     for="raw_on"
                     >Comando RAW para ligar</label
                   ><textarea
-                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     name="raw_on"
                     placeholder="Comando para ligar"
                     required
@@ -45,7 +45,7 @@
                     for="raw_off"
                     >Comando RAW para desligar</label
                   ><textarea
-                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    class="dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800 border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     name="raw_off"
                     placeholder="Comando para desligar"
                     required

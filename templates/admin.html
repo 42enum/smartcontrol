@@ -9,7 +9,7 @@
   <body>
     <div class="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       {% include 'sidebar.html' %}
-      <div class="flex flex-col rounded-lg bg-gray-100 bg-opacity-40 backdrop-blur-lg backdrop-filter">
+      <div class="flex flex-col dark:text-neutral-300 bg-gray-100 dark:bg-neutral-950 bg-opacity-40 backdrop-blur-lg backdrop-filter">
         {% with title='Admin' %} {% include 'header.html' %} {% endwith %}
 
         <main class="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
@@ -21,7 +21,7 @@
             >
           </div>
           <div class="flex items-center">
-            <h2 class="text-lg font-semibold text-gray-900 md:text-2xl">Aparelhos</h2>
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-neutral-300 md:text-2xl">Aparelhos</h2>
             <a
               class="ring-offset-background focus-visible:ring-ring hover:bg-primary/90 ml-auto inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg bg-blue-600 px-3 text-sm font-medium text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
               href="{{ url_for('add_equipment') }}"
@@ -29,12 +29,12 @@
               Adicionar Aparelho
             </a>
           </div>
-          <div class="rounded-lg border bg-white shadow-lg">
+          <div class="rounded-lg border bg-white shadow-lg dark:bg-neutral-800 dark:border-neutral-800 ">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
-                <thead class="[&amp;_tr]:border-b">
+                <thead class="[&amp;_tr]:border-b dark:border-b-0">
                   <tr
-                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b dark:border-b-0 transition-colors"
                   >
                     <th
                       class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
@@ -66,7 +66,7 @@
                 <tbody class="[&amp;_tr:last-child]:border-0">
                   {% for equipment in equipment_list %}
                   <tr
-                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b dark:border-b-0 transition-colors"
                   >
                     <td
                       class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"
@@ -125,7 +125,7 @@
             </div>
           </div>
           <div class="flex items-center">
-            <h2 class="text-lg font-semibold text-gray-900 md:text-2xl">
+            <h2 class="text-lg font-semibold text-gray-900 md:text-2xl dark:text-neutral-300">
               Comandos Infravermelho
             </h2>
             <a
@@ -135,12 +135,12 @@
               Adicionar Comando IR
             </a>
           </div>
-          <div class="rounded-lg border bg-white shadow-lg">
+          <div class="rounded-lg border bg-white shadow-lg dark:bg-neutral-800 dark:border-neutral-800 ">
             <div class="relative w-full overflow-auto">
               <table class="w-full caption-bottom text-sm">
-                <thead class="[&amp;_tr]:border-b">
+                <thead class="[&amp;_tr]:border-b dark:border-b-0">
                   <tr
-                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b dark:border-b-0 transition-colors"
                   >
                     <th
                       class="text-gray-500 text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 h-12 w-[80px] px-4 text-left align-middle font-medium"
@@ -172,7 +172,7 @@
                 <tbody class="[&amp;_tr:last-child]:border-0">
                   {% for ir_command in ir_commands %}
                   <tr
-                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors"
+                    class="hover:bg-muted/50 data-[state=selected]:bg-muted border-b dark:border-b-0 transition-colors"
                   >
                     <td
                       class="[&amp;:has([role=checkbox])]:pr-0 p-4 align-middle"

@@ -1,16 +1,24 @@
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.getElementById("logo").setAttribute("src", "{{ url_for('static', filename='logo-ufca-white.svg') }}");
+    }
+  });
+</script>
+
 <div
-  class="hidden rounded-lg border-r bg-white bg-opacity-40 shadow-lg backdrop-blur-lg backdrop-filter lg:block"
+  class="hidden border-r bg-white bg-opacity-40 shadow-lg backdrop-blur-lg backdrop-filter lg:block dark:border-r-neutral-800 dark:bg-neutral-950 dark:opacity-100 dark:border-neutral-950"
 >
   <div class="flex h-full max-h-screen flex-col gap-2">
-    <div class="flex items-center justify-center h-2 py-10">
+    <div class="flex items-center justify-center h-2 py-10 mb-3">
       <a class="flex flex-col items-center justify-center font-semibold" href="#"
         >
 
         <div class="w-36 h-20">
 
-          <img class="w-full" src="{{ url_for('static', filename='logo-ufca.svg') }}" alt="Logo da Universidade">
+          <img id="logo" class="w-full" src="{{ url_for('static', filename='logo-ufca.svg') }}" alt="Logo da Universidade">
         </div>
-        <span class="text-gray-700 font-medium" >Gerenciamento Inteligente</span>
+        <span class="text-gray-300 font-medium" >Gerenciamento Inteligente</span>
           </a
       >
       
@@ -19,12 +27,12 @@
       <nav class="grid items-start px-4 font-medium">
         {% if request.path == url_for('dashboard') %}
         <a
-        class="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-3 text-gray-900 shadow-md transition-all hover:text-blue-900"
+        class="flex items-center gap-3 rounded-lg bg-gray-100  px-3 py-3 text-gray-900 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-blue-600 shadow-md transition-all hover:text-blue-900"
         href="{{ url_for('dashboard') }}"
       >
         {% else %}
         <a
-          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900"
+          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900 dark:text-neutral-600 dark:hover:text-neutral-300"
           href="{{ url_for('dashboard') }}"
         >
         {% endif %}
@@ -54,12 +62,12 @@
         {% for building in buildings %}
         {% if request.path == url_for('building_detail', building=building) %}
         <a
-        class="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-3 text-gray-900 shadow-md transition-all hover:text-blue-900"
+        class="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-3 text-gray-900 shadow-md transition-all hover:text-blue-900 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-blue-600"
         href="{{ url_for('building_detail', building=building) }}"
       >
         {% else %}
         <a
-          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900"
+          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900 dark:text-neutral-600 dark:hover:text-neutral-300"
           href="{{ url_for('building_detail', building=building) }}"
         >
         {% endif %}
@@ -95,12 +103,12 @@
         {% endfor %} {% if is_admin() %}
         {% if request.path.startswith(url_for('admin_page')) %}
         <a
-        class="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-3 text-gray-900 shadow-md transition-all hover:text-blue-900"
+        class="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-3 text-gray-900 shadow-md transition-all hover:text-blue-900 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-blue-600"
         href="{{ url_for('admin_page') }}"
       >
         {% else %}
         <a
-          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900"
+          class="flex items-center gap-3 rounded-lg px-3 py-3 text-gray-500 transition-all hover:text-gray-900 dark:text-neutral-600 dark:hover:text-neutral-300"
           href="{{ url_for('admin_page') }}"
         >
         {% endif %}

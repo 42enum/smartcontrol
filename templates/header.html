@@ -1,5 +1,5 @@
 <header
-  class="flex h-14 items-center gap-4 rounded-t-lg border-b bg-white px-6 backdrop-blur-lg backdrop-filter lg:h-[60px]"
+  class="flex h-14 items-center gap-4 border-b bg-white px-6 backdrop-blur-lg backdrop-filter lg:h-[60px] dark:bg-neutral-950 dark:border-b-neutral-800 dark:text-gray-300"
 >
   <a class="lg:hidden" href="#"
     ><svg
@@ -29,13 +29,13 @@
     <span class="sr-only">Home</span></a
   >
   <div class="w-full flex-1">
-    <h1 class="text-lg text-gray-900 md:text-2xl">{{ title }}</h1>
+    <h1 class="text-lg dark:text-gray-300 md:text-2xl">{{ title }}</h1>
   </div>
   <div class="flex items-center gap-4">
     <input
       type="text"
       placeholder="Pesquisar..."
-      class="flex-grow rounded-lg border p-2"
+      class="flex-grow rounded-lg border p-2 dark:bg-neutral-950 dark:text-gray-300 dark:border-neutral-800"
     /><button
       class="ring-offset-background focus-visible:ring-ring hover:bg-accent hover:text-accent-foreground inline-flex h-10 w-10 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
     >
@@ -87,7 +87,7 @@
       ></span>
 
       <div
-        class="absolute -bottom-8 left-[-2.5rem] flex h-8 w-fit items-center justify-center rounded-lg bg-white px-2 text-center text-gray-900 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+        class="absolute -bottom-8 left-[-2.5rem] flex h-8 w-fit items-center justify-center rounded-lg bg-white dark:bg-neutral-700 dark:text-neutral-300 px-2 text-center text-gray-900 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
       >
         Notificações
       </div>
@@ -116,12 +116,12 @@
       </button>
 
       <div
-        class="absolute -bottom-28 left-[-6rem] flex w-fit items-center justify-center rounded-lg bg-white pt-1 pb-2 px-2 text-center opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+        class="absolute -bottom-28 left-[-6rem] flex w-fit items-center justify-center rounded-lg bg-white dark:bg-neutral-700 dark:text-neutral-300 pt-1 pb-2 px-2 text-center opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100"
       >
         <div class="flex flex-col items-center gap-2 justify-start">
-          <p class="">Logado como {{ current_user.username }}</p>
+          <p class="">Logado como <em>{{ current_user.username }}</em></p>
           <a
-            class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 float-end inline-flex h-10 w-full transform items-center justify-center whitespace-nowrap rounded-lg bg-gradient-to-r from-red-200 to-red-200 px-4 text-sm font-medium text-red-700 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70"
+            class="ring-offset-background focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 float-end inline-flex h-10 w-full transform items-center justify-center whitespace-nowrap rounded-lg bg-red-200 dark:bg-red-800  px-4 text-sm font-medium text-red-700 dark:text-red-200 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70"
             href="{{ url_for('logout') }}"
           >
             <svg
