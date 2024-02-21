@@ -12,6 +12,15 @@ Smart Control é uma aplicação web que funciona como uma dashboard e plataform
 
 Siga as etapas abaixo para configurar o ambiente de desenvolvimento:
 
+0. **Criar arquivo .env na raíz do projeto, configurar banco de dados e segredo para senhas**
+```env
+# Flask
+SECRET_KEY=secret
+
+# Database
+DATABASE_URI=postgresql://postgres:1234@localhost/smartcontroldb
+```
+
 1. **Criar e ativar um ambiente Python**
 
 ```bash
