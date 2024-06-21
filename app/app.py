@@ -1,24 +1,25 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, jsonify
-from flask_sqlalchemy import SQLAlchemy
+import os
+import uuid
+
+import requests
+from dotenv import load_dotenv
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask_bcrypt import Bcrypt
 from flask_login import (
     LoginManager,
     UserMixin,
-    login_user,
-    login_required,
-    logout_user,
     current_user,
+    login_required,
+    login_user,
+    logout_user,
 )
 from flask_migrate import Migrate
-from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from werkzeug.security import generate_password_hash, check_password_hash
-from wtforms import StringField, PasswordField, SubmitField
+from sqlalchemy import String, cast
+from werkzeug.security import check_password_hash, generate_password_hash
+from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired
-import os
-import uuid
-from flask_bcrypt import Bcrypt
-from sqlalchemy import cast, String
-import requests
 
 # Config
 load_dotenv()
@@ -134,7 +135,7 @@ def building_detail(building):
         "building_detail.html",
         building=building,
         equipment_list=equipment_in_building,
-    )   
+    )
 
 
 @app.route("/admin")
@@ -278,7 +279,7 @@ def request_to_esp():
             {
                 "status": "success",
                 "message": f"No IR Command found for this equipment's model: {equipment.model}",
-                "mensagem": f"Comando IR do modelo {equipment.model} não foi encontrado"
+                "mensagem": f"Comando IR do modelo {equipment.model} não foi encontrado",
             }
         )
 
@@ -311,10 +312,22 @@ def request_to_esp():
     if response.status_code == 200:
         equipment.active = not equipment.active
         db.session.commit()
-        
-        return jsonify({"status": "success", "message": "POST request sent to ESP", "mensagem": "Comando enviado com sucesso."})
+
+        return jsonify(
+            {
+                "status": "success",
+                "message": "POST request sent to ESP",
+                "mensagem": "Comando enviado com sucesso.",
+            }
+        )
     else:
-        return jsonify({"status": "failed", "message": "POST request to ESP failed", "mensagem": "ESP retornou uma resposta inesperada."})
+        return jsonify(
+            {
+                "status": "failed",
+                "message": "POST request to ESP failed",
+                "mensagem": "ESP retornou uma resposta inesperada.",
+            }
+        )
 
 
 @app.route("/simplified_request_to_esp", methods=["POST"])
@@ -338,7 +351,7 @@ def simplified_request_to_esp():
         )
 
     data_to_send = "desligar" if equipment.active else "ligar"
-    
+
     headers = {
         "Content-Type": "text/plain",
     }
@@ -366,10 +379,21 @@ def simplified_request_to_esp():
         equipment.active = not equipment.active
         db.session.commit()
 
-        return jsonify({"status": "success", "message": "POST request sent to ESP", "mensagem": "Comando enviado com sucesso."})
+        return jsonify(
+            {
+                "status": "success",
+                "message": "POST request sent to ESP",
+                "mensagem": "Comando enviado com sucesso.",
+            }
+        )
     else:
-        return jsonify({"status": "failed", "message": "POST request to ESP failed", "mensagem": "ESP retornou uma resposta inesperada."})
-
+        return jsonify(
+            {
+                "status": "failed",
+                "message": "POST request to ESP failed",
+                "mensagem": "ESP retornou uma resposta inesperada.",
+            }
+        )
 
 
 @app.route("/register", methods=["GET", "POST"])
